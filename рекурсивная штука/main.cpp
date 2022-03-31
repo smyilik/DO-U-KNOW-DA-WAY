@@ -72,7 +72,7 @@ bool isExit(vector<string>& maze, int x, int y)
 
 void Move(vector<string>& maze, int x, int y, vector<vector<int>> &moves)
 {
-	maze[y][x] = '1';
+	if (maze[y][x] == ' ') maze[y][x] = '1';
 	if (maze[0][x] == '1' ||
 		maze[y][0] == '1' ||
 		maze[maze.size() - 1][x] == '1' ||
@@ -82,8 +82,8 @@ void Move(vector<string>& maze, int x, int y, vector<vector<int>> &moves)
 	}
 	if (y > 0 && maze[y - 1][x] == ' ') Move(maze, x, y - 1, moves);
 	if (x > 0 && maze[y][x - 1] == ' ') Move(maze, x - 1, y, moves);
-	if (y < maze.size() && maze[y + 1][x] == ' ') Move(maze, x, y + 1, moves);
-	if (x < maze[0].size() && maze[y][x + 1]) Move(maze, x + 1, y, moves);
+	if (y < maze.size() - 1 && maze[y + 1][x] == ' ') Move(maze, x, y + 1, moves);
+	if (x < maze[0].size() - 1 && maze[y][x + 1]) Move(maze, x + 1, y, moves);
 }
 
 int main()
@@ -93,6 +93,7 @@ int main()
 	getline(cin, path);
 
 	vector<string> maze = ReadFile(path);
+
 	vector<vector<int>> moves = vector<vector<int>>();
 	int y = MYstoi(maze[maze.size() - 2]);
 	int x= MYstoi(maze[maze.size() - 1]);
