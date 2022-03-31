@@ -1,1 +1,1 @@
-https://tenor.com/view/do-you-know-the-way-ugandan-knuckles-gif-10737833
+https://c.tenor.com/RBNrWicFXa8AAAAC/do-you-know-the-way-ugandan-knuckles.gif
