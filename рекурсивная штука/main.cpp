@@ -50,29 +50,13 @@ bool MazeChecker(vector<string>& maze)
 	return true;
 }
 
-void whereGo(vector<string> &maze, vector<bool>& whereCanIGo, int x, int y) {
-	if (maze[y][x - 1] == ' ') whereCanIGo[0] = true;
-	else whereCanIGo[0] = false;
-	if (maze[y - 1][x] == ' ') whereCanIGo[1] = true;
-	else whereCanIGo[1] = false;
-	if (maze[y][x + 1] == ' ') whereCanIGo[2] = true;
-	else whereCanIGo[2] = false;
-	if (maze[y + 1][x] == ' ') whereCanIGo[3] = true;
-	else whereCanIGo[3] = false;
-}
-
-bool isExit(vector<string>& maze, int x, int y)
-{
-	if (x - 1 == 0 && maze[y][x - 1] == ' ') return true;
-	if (y - 1 == 0 && maze[y - 1][x] == ' ') return true;
-	if (x + 1 == maze[0].size() - 1 && maze[y][x + 1] == ' ') return true;
-	if (y + 1 == maze.size() - 1 && maze[y + 1][x] == ' ') return true;
-	return false;
-}
-
-void Move(vector<string>& maze, int x, int y, vector<vector<int>> &moves)
+void Move(vector<string>& maze, int x, int y, vector<vector<int>>& moves)
 {
 	if (maze[y][x] == ' ') maze[y][x] = '1';
+	for (int i = 0; i < maze.size(); i++) {
+		cout << maze[i] << endl;
+	}
+	cout << endl << endl;
 	if (maze[0][x] == '1' ||
 		maze[y][0] == '1' ||
 		maze[maze.size() - 1][x] == '1' ||
@@ -81,9 +65,9 @@ void Move(vector<string>& maze, int x, int y, vector<vector<int>> &moves)
 		return;
 	}
 	if (y > 0 && maze[y - 1][x] == ' ') Move(maze, x, y - 1, moves);
-	if (x > 0 && maze[y][x - 1] == ' ') Move(maze, x - 1, y, moves);
-	if (y < maze.size() - 1 && maze[y + 1][x] == ' ') Move(maze, x, y + 1, moves);
-	if (x < maze[0].size() - 1 && maze[y][x + 1]) Move(maze, x + 1, y, moves);
+	else if (x > 0 && maze[y][x - 1] == ' ') Move(maze, x - 1, y, moves);
+	else if (y < maze.size() - 1 && maze[y + 1][x] == ' ') Move(maze, x, y + 1, moves);
+	else if (x < maze[0].size() - 1 && maze[y][x + 1]) Move(maze, x + 1, y, moves);
 }
 
 int main()
@@ -93,7 +77,6 @@ int main()
 	getline(cin, path);
 
 	vector<string> maze = ReadFile(path);
-
 	vector<vector<int>> moves = vector<vector<int>>();
 	int y = MYstoi(maze[maze.size() - 2]);
 	int x= MYstoi(maze[maze.size() - 1]);
